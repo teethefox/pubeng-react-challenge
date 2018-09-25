@@ -2,6 +2,7 @@
   box-sizing: border-box;
 }
 
+
 body {
   display: flex;
   justify-content: center;
@@ -35,4 +36,34 @@ textarea {
   padding: .5rem 1rem;
   width: 100%;
   border: 1px solid #eee;
+}
+
+/* styles for ratings section */
+
+
+.star-rating {
+
+  &__star {
+    display: inline-block;
+    padding: 3px;
+    vertical-align: middle;
+    line-height: 1;
+    font-size: 1.5em;
+    color: #ABABAB;
+    transition: color .2s ease-out;
+
+    &:hover {
+      cursor: pointer;
+    }
+    
+    &.is-selected {
+      color: #FFD700;
+    }
+    
+    &.is-disabled:hover {
+      cursor: default;
+    }
+  }
+
+
 }

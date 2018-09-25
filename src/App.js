@@ -1,5 +1,5 @@
 import React from 'react'
-import { Checkbox, Repeatable, Text, Textarea } from './components'
+import { Checkbox, Repeatable, Text, Textarea, Select } from './components'
 import api from './mockApi'
 
 class App extends React.Component {
@@ -15,23 +15,19 @@ class App extends React.Component {
         cast: [],
       }
     }
-
-    this.handleChange = this.handleChange.bind(this)
-    this.handleUpdate = this.handleUpdate.bind(this)
-    this.Input = this.Input.bind(this)
   }
 
   /**
    * 
    */
-  handleChange(delta) {
+  handleChange = (delta) => {
     this.setState(({ data }) => ({ data: { ...data, ...delta }}))
   }
 
   /**
    * 
    */
-  async handleUpdate(publish = false) {
+   handleUpdate = async (publish = false) => {
     const { data } = this.state
     const results = await api.post({ ...data, publish })
     console.log('Content updated!')
@@ -41,7 +37,7 @@ class App extends React.Component {
   /**
    * 
    */
-  Input({ children, iterable, label, id }) {
+  Input = ({ children, iterable, label, id }) => {
     const handleChange = value => {
       this.handleChange({ [id]: value })
     }
@@ -80,9 +76,12 @@ class App extends React.Component {
     )
   }
 
+
   render() {
     const { Input } = this
+    const options = Array(2020 - 2010 + 1).fill().map((item, index) => 2010 + index)
     return (
+     
       <div className="Form">
         <Input label="Title" id="title">
           {props => <Text {...props} />}
@@ -95,6 +94,10 @@ class App extends React.Component {
         </Input>
         <Input label="Cast" iterable id="cast">
           {props => <Repeatable {...props} />}
+        </Input>
+        
+        <Input label="Release Year" id="year">
+          {props => <Select {...props} options = {options} />}
         </Input>
         <button onClick={() => this.handleUpdate(true)}>
           {'Publish'}
