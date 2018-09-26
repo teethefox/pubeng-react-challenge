@@ -18,7 +18,6 @@ class App extends React.Component {
   }
 
 
-
   /**
    * 
    */
@@ -67,10 +66,14 @@ class App extends React.Component {
         id,
         value,
         onBlur: () => this.handleUpdate(false),
-        onChange: e => 
+        onChange: e => {
+
+        if(e.target){
         handleChange(e.target.value)
         }
-   
+        else{
+          handleChange(e)
+        }
       }
       }
     }
