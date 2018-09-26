@@ -34,5 +34,17 @@
       { "id": 8, "name": "Jude Law" },
       { "id": 9, "name": "Samuel L. Jackson" }
     ]
+  },
+  "4": {
+    "title": "Guardians of the Galaxy",
+    "rating": 5,
+    "description": "A group of intergalactic criminals are forced to work together to stop a fanatical warrior from taking control of the universe. The soundtrack is also fantastic.",
+    "year": 2014,
+    "upcoming": false,
+    "cast": [
+      { "id": 10, "name": "Chris Pratt" },
+      { "id": 11, "name": "Vin Diesel" },
+      { "id": 12, "name": " Bradley Cooper" }
+    ]
   }
 }
