@@ -7,6 +7,8 @@ class App extends React.Component {
     super(props)
     this.state = {
       isLoading: true,
+      errMsg: '',
+      updateMsg: '',
       data: {
         title: '',
         rating: 0,
@@ -14,6 +16,7 @@ class App extends React.Component {
         description: '',
         upcoming: false, 
         cast: [], 
+       
         
       }
     }
@@ -47,10 +50,24 @@ class App extends React.Component {
    * 
    */
    handleUpdate = async (publish = false) => {
+    this.setState({updateMsg: 'Adding movie...', errMsg: ''})
     const { data } = this.state
     const results = await api.post({ ...data, publish })
-    console.log('Content updated!')
-    return results
+    .then((res) => {   
+      console.log(res)
+      setTimeout(() => {
+        this.setState({updateMsg: 'Successfully Added!', errMsg: ''})
+      }, 1000)
+        })
+    // Invalid ID
+    .catch((err) => {
+      setTimeout(() => {
+        this.setState({errMsg: 'Whoops – API error.', updateMsg: ''})
+      }, 1000)
+        })
+      
+    
+
   }
 
   /**
@@ -105,8 +122,9 @@ class App extends React.Component {
 
 
   render() {
+    console.log(this.state.errMsg)
     const { Input } = this
-    const {isLoading} = {...this.state}
+    const {isLoading, errMsg, updateMsg} = {...this.state}
     const options = Array(2020 - 2010 + 1).fill().map((item, index) => 2010 + index)
     return (
      <React.Fragment>
@@ -119,7 +137,19 @@ class App extends React.Component {
 
     :
       <div className="Form">
-     
+     {errMsg !== '' ?
+     <div className="errMsg">
+     {errMsg}
+       </div>
+       : updateMsg !== '' ?
+       <div className="updateMsg">
+       {updateMsg}
+         </div>
+         :
+         <div >
+       
+         </div>
+     }
         <Input label="Title" id="title">
           {props => <Text {...props} />}
         </Input>

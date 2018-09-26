@@ -14,9 +14,13 @@ body {
 
 .Form {
   padding: 2rem;
+  padding-top: 4em;
   background: linear-gradient(to bottom, rgba(255,255,255, .95), white);
   border-radius: .25rem;
   box-shadow: 1em 1em 1em rgba(0,0,0, .1);
+  width: 25em;
+  height: 30em;
+  position: relative;
 }
 
 .Form-Group {
@@ -75,4 +79,26 @@ textarea {
 .starRating:not(old) > label:hover ~ label:before,
 .starRating:not(:hover) > :checked ~ label:before{
   opacity : 1;
+}
+
+.errMsg {
+  background-color: #ff7272;
+  color: white;
+  padding: 1em;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  left: 0;
+}
+
+.updateMsg {
+  background-color: #71ff92;
+  color: white;
+  padding: 1em;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  left: 0;
 }
