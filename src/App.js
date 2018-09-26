@@ -6,14 +6,32 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      isLoading: true,
       data: {
         title: '',
         rating: 0,
         year: null,
         description: '',
         upcoming: false, 
-        cast: [],
+        cast: [], 
+        
       }
+    }
+  }
+  componentDidMount() {
+    const props = {...this.props}
+    if(props.id) {
+      api.get(props.id)
+        .then((data) => {   
+
+          this.setState({isLoading: false, data: data})
+        })
+        // Invalid ID
+        .catch((data) => {
+          this.setState({isLoading: false})
+        })
+    } else {
+      this.setState({isLoading: false})
     }
   }
 
@@ -88,10 +106,20 @@ class App extends React.Component {
 
   render() {
     const { Input } = this
+    const {isLoading} = {...this.state}
     const options = Array(2020 - 2010 + 1).fill().map((item, index) => 2010 + index)
     return (
-     
+     <React.Fragment>
+        {isLoading === true ?
+           <div className="Form">
+     Fetching Data... <br />
+     <img alt="loader" src ={ require('../src/images/preload.gif')}/>			     
+
+         </div>
+
+    :
       <div className="Form">
+     
         <Input label="Title" id="title">
           {props => <Text {...props} />}
         </Input>
@@ -115,6 +143,8 @@ class App extends React.Component {
           {'Publish'}
         </button>
       </div>
+        }
+      </React.Fragment>
     )
   }
 }
