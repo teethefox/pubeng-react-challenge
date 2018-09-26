@@ -1,5 +1,5 @@
 import React from 'react'
-import { Checkbox, Repeatable, Text, Textarea, Select } from './components'
+import { Checkbox, Repeatable, Text, Textarea, Select, Rating } from './components'
 import api from './mockApi'
 
 class App extends React.Component {
@@ -11,11 +11,13 @@ class App extends React.Component {
         rating: 0,
         year: null,
         description: '',
-        upcoming: true, 
+        upcoming: false, 
         cast: [],
       }
     }
   }
+
+
 
   /**
    * 
@@ -65,7 +67,11 @@ class App extends React.Component {
         id,
         value,
         onBlur: () => this.handleUpdate(false),
-        onChange: e => handleChange(e.target.value),
+        onChange: e => 
+        handleChange(e.target.value)
+        }
+   
+      }
       }
     }
     return (
@@ -94,6 +100,9 @@ class App extends React.Component {
         </Input>
         <Input label="Cast" iterable id="cast">
           {props => <Repeatable {...props} />}
+        </Input>
+        <Input label="Rating" id="rating">
+          {props => <Rating {...props} />}
         </Input>
         
         <Input label="Release Year" id="year">
